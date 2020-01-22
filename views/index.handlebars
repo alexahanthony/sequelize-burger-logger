@@ -1,0 +1,52 @@
+{{!-- header --}}
+<div class="jumbotron jumbotron-fluid bg-dark text-light">
+  <div class="container">
+    <h1 class="display-4">Burger Logger!</h1>
+    <h1><i class="fas fa-hamburger black"></i></h1>
+  </div>
+</div>
+
+{{!-- add burger --}}
+<div class="centered">
+  <h2>Add a Burger!</h2>
+
+
+<form class="create-form">
+  <div class="form-group input-form"> 
+    <label for="exampleFormControlInput1 ca"></label>
+    <input type="text" class="form-control" id="ca" name="burger_name" placeholder="Burger Name">
+  </div>
+  
+  <button class="pink-button" type="submit">Place My Order</button>
+  
+</form>
+</div>
+
+{{!-- ordered burger list --}}
+<div class="container2">
+<div class="row">
+  <div class="col-6">
+    <h2>Ordered Burgers:</h2>
+    <ol>
+      {{#each Burger}}
+      {{#unless devoured}}
+      {{> burgers/burger-block devoured=false}}
+      {{/unless}}
+      {{/each}}
+    </ol>
+  </div>
+
+{{!-- eaten burger list --}}
+  <div class="col-6">
+    <h2>Eaten Burgers:</h2>
+    <ul>
+      {{#each Burger}}
+      {{#if devoured}}
+      {{> burgers/burger-block devoured=true}}
+      {{/if}}
+      {{/each}}
+    </ul>
+  </div>
+</div>
+</div>
+
