@@ -2,19 +2,24 @@
 $(function() {
     $(".devour-burger").on("click", function(event) {
       var id = $(this).data("id");
-      var newBurger = $(this).data("newBurger");
-  
+      var newdevoured = $(this).data("newdevoured");
+      if (!newdevoured) {
+        newdevoured = true;
+      } else {
+        newdevoured = false;
+      }
       var newDevouredState = {
-        devoured: true
+        devoured: newdevoured,
+        id
       };
   
       // Send the PUT request.
-      $.ajax("/api/burgers/" + id, {
+      $.ajax("/api/burgers", {
         type: "PUT",
         data: newDevouredState
       }).then(
-        function() {
-          console.log("changed hunger to", newBurger);
+        function(newBurger) {
+          console.log(newBurger);
           // Reload the page to get the updated list
           location.reload();
         }

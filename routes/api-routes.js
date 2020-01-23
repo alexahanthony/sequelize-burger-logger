@@ -15,11 +15,11 @@ module.exports = function(app) {
   // GET route for getting all of the burgers
   app.get("/", function(req, res) {
     // findAll returns all entries for a table when used with no options
-    db.Burger.findAll({}).then(function(data) {
+    db.Burger.findAll({raw:true}).then(function(data) {
       var hbsObject = {
         Burger: data
       };
-      console.log(hbsObject);
+      // console.log(hbsObject);
       res.render("index", hbsObject);
     });
       
@@ -54,15 +54,15 @@ module.exports = function(app) {
 
   // PUT route for updating burgers. 
   app.put("/api/burgers", function(req, res) {
+    console.log(req.body)
     db.Burger.update({
-      burger_name: req.body.burger_name,
       devoured: req.body.devoured
     }, {
       where: {
         id: req.body.id
       }
-    }).then(function(burger_db) {
-      res.json(burger_db);
+    }).then(function(data) {
+      res.json(data);
     })
       .catch(function(err) {
         res.json(err);
