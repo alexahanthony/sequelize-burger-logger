@@ -11,42 +11,51 @@
   <h2>Add a Burger!</h2>
 
 
-<form class="create-form">
-  <div class="form-group input-form"> 
-    <label for="exampleFormControlInput1 ca"></label>
-    <input type="text" class="form-control" id="ca" name="burger_name" placeholder="Burger Name">
-  </div>
-  
-  <button class="pink-button" type="submit">Place My Order</button>
-  
-</form>
+  <form class="create-form">
+    <div class="form-group input-form">
+      <label for="exampleFormControlInput1 ca"></label>
+      <input type="text" class="form-control" id="ca" name="burger_name" placeholder="Burger Name">
+    </div>
+
+    <button class="pink-button" type="submit">Place My Order</button>
+
+  </form>
 </div>
 
 {{!-- ordered burger list --}}
 <div class="container2">
-<div class="row">
-  <div class="col-6">
-    <h2>Ordered Burgers:</h2>
-    <ol>
-      {{#each Burger}}
-      {{#unless devoured}}
-      {{> burgers/burger-block devoured=false}}
-      {{/unless}}
-      {{/each}}
-    </ol>
-  </div>
+  <div class="row">
+    <div class="col-6">
+      <h2>Ordered Burgers:</h2>
+      <ol>
+        {{#each Burger}}
+        {{#unless devoured}}
+        <li>
+          
 
-{{!-- eaten burger list --}}
-  <div class="col-6">
-    <h2>Eaten Burgers:</h2>
-    <ul>
-      {{#each Burger}}
-      {{#if devoured}}
-      {{> burgers/burger-block devoured=true}}
-      {{/if}}
-      {{/each}}
-    </ul>
+          <button class="change-status" data-id="{{id}}" data-newdevoured="{{devoured}}">
+            {{burger_name}}
+          </button>
+
+          <button class="devour-burger" data-id="{{id}}">Eat!</button>
+          <button class="delete-burger" data-id="{{id}}">Delete!</button>
+
+        </li>
+        {{/unless}}
+        {{/each}}
+      </ol>
+    </div>
+
+    {{!-- eaten burger list --}}
+    <div class="col-6">
+      <h2>Eaten Burgers:</h2>
+      <ul>
+        {{#each Burger}}
+        {{#if devoured}}
+        {{> burgers/burger-block devoured=true}}
+        {{/if}}
+        {{/each}}
+      </ul>
+    </div>
   </div>
 </div>
-</div>
-
